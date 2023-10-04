@@ -37,22 +37,22 @@ jobs:
           charts_dir: charts
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      ## Curent deployment process no longer needs a dependency free keycloak helm chart
+      # - name: Remove dependencies of Keycloak Helm chart
+      #   uses: mikefarah/yq@master
+      #   with:
+      #     cmd: yq -i 'del(.dependencies) | .version = .version + "-nodep"' ./charts/keycloak/Chart.yaml
 
-      - name: Remove dependencies of Keycloak Helm chart
-        uses: mikefarah/yq@master
-        with:
-          cmd: yq -i 'del(.dependencies) | .version = .version + "-nodep"' ./charts/keycloak/Chart.yaml
+      # - name: Remove requirements of Keycloak Helm chart
+      #   run: |
+      #     rm -rf charts || true
+      #     rm requirements.lock || true
+      #   working-directory: ./charts/keycloak
 
-      - name: Remove requirements of Keycloak Helm chart
-        run: |
-          rm -rf charts || true
-          rm requirements.lock || true
-        working-directory: ./charts/keycloak
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.4.0
-        with:
-          charts_dir: charts
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          CR_SKIP_EXISTING: true
+      # - name: Run chart-releaser
+      #   uses: helm/chart-releaser-action@v1.4.0
+      #   with:
+      #     charts_dir: charts
+      #   env:
+      #     CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      #     CR_SKIP_EXISTING: true
