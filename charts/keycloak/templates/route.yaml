@@ -24,3 +24,9 @@ spec:
     {{ else }}
     name: {{ include "sso-keycloak.fullname" . }}
     {{ end }}
+  port:
+    {{ if .Values.tls.enabled }}
+    targetPort: https
+    {{ else }}
+    targetPort: http
+    {{ end }}
