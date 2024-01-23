@@ -117,6 +117,11 @@ affinityTemplate: |
         labelSelector:
           matchLabels: {{ include "sso-keycloak.selectorLabels" . | nindent 10 }}
 
+podDisruptionBudget:
+  enabled: false
+  minAvailable:
+  maxUnavailable:
+
 patroni:
   replicaCount: 3
   # RH-SSO v7.5-9 is not tested with PostgreSQL 14
