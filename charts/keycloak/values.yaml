@@ -122,6 +122,13 @@ podDisruptionBudget:
   minAvailable:
   maxUnavailable:
 
+serviceAccount:
+  create: true
+
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
+
 patroni:
   replicaCount: 3
   # RH-SSO v7.5-9 is not tested with PostgreSQL 14

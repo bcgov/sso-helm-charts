@@ -82,3 +82,14 @@ Maintenance Selector labels
 app.kubernetes.io/name: {{ include "sso-keycloak.name" . }}-maintenance
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Create the name of the service account to use
+*/}}
+{{- define "sso-keycloak.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create }}
+{{- default (include "sso-keycloak.fullname" .) .Values.serviceAccount.name }}
+{{- else }}
+{{- default "default" .Values.serviceAccount.name }}
+{{- end }}
+{{- end }}
