@@ -26,7 +26,7 @@ spec:
       initContainers:
         - name: {{ .Chart.Name }}-init
           image: openshift/origin-cli:latest
-          command: 
+          command:
             - "/bin/sh"
             - "-c"
             - |
@@ -50,7 +50,7 @@ spec:
                 echo "Waiting for StatefulSet {{ .Values.patroni.nameOverride }} rollout to complete..."
                 sleep 5
               done
-              
+
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
