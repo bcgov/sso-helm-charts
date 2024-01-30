@@ -24,6 +24,15 @@ spec:
       labels: {{ include "sso-keycloak.labels" . | nindent 8 }}
     spec:
       containers:
+        - name: {{ .Chart.Name }}-init
+          image: openshift/origin-cli:latest
+          command: 
+            - "/bin/sh"
+            - "-c"
+            - |
+              #!/bin/sh
+              set -e
+              oc wait --for=condition=ready -l app.kubernetes.io/name=sso-patroni pod --timeout=5m
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
