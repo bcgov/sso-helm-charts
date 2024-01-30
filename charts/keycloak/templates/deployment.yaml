@@ -50,7 +50,7 @@ spec:
                 echo "Waiting for StatefulSet {{ .Values.patroni.nameOverride }} rollout to complete..."
                 sleep 5
               done
-
+      serviceAccountName: {{ include "sso-keycloak.serviceAccountName" . }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
