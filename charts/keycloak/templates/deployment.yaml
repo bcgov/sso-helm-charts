@@ -34,20 +34,17 @@ spec:
               name={{ .Values.patroni.nameOverride }}
               echo "Current Namespace: $namespace"
               echo "Patroni Statefulset: $name"
-              check_rollout_status(){
-                replicas_desired={{ .Values.patroni.replicaCount }}
-                replicas_current=$(oc get -n $namespace statefulset $name -o jsonpath='{.status.currentReplicas}')
-                # Set replicas_current to zero if it is not available
-                replicas_current="${replicas_current:-0}"
-                echo "Replicas desired: ${replicas_desired}, Replicas current: ${replicas_current}"
-                if [ "${replicas_current}" -eq "${replicas_desired}" ]; then
-                    return 0  # Rollout is complete
+              check_master_ready(){
+                if kubectl -n $namespace  get pods -l app.kubernetes.io/name=$name,spilo-role=master -o custom-columns='ready:status.containerStatuses[*].ready' | grep true -c; then
+                  echo "Master pod is ready"
+                  return 0
                 else
-                    return 1  # Rollout is not complete
+                  echo "Master pod is not ready"
+                  return 1
                 fi
               }
-              while ! check_rollout_status; do
-                echo "Waiting for StatefulSet {{ .Values.patroni.nameOverride }} rollout to complete..."
+              while ! check_master_ready; do
+                echo "Waiting for master pod to be ready..."
                 sleep 5
               done
       serviceAccountName: {{ include "sso-keycloak.serviceAccountName" . }}
