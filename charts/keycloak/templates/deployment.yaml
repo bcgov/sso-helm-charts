@@ -51,7 +51,7 @@ spec:
               - timeout 60 /opt/eap/bin/livenessProbe.sh
           {{- else }}
             httpGet:
-              path: /auth/realms/master/.well-known/openid-configuration
+              path: /auth/health/live
               port: 8080
           {{- end -}}
           {{ (omit .Values.livenessProbe "enabled" "verification") | toYaml | nindent 12 }}
@@ -67,7 +67,7 @@ spec:
               - timeout 60 /opt/eap/bin/readinessProbe.sh
           {{- else }}
             httpGet:
-              path: /auth/realms/master/.well-known/openid-configuration
+              path: /auth/health/ready
               port: 8080
           {{- end -}}
           {{ (omit .Values.readinessProbe "enabled" "verification") | toYaml | nindent 12 }}
@@ -159,14 +159,12 @@ spec:
               value: America/Vancouver
             - name: KC_HOSTNAME_STRICT_HTTPS
               value: "true"
-            - name: KC_HOSTNAME
-              value: {{ printf "%s-%s.apps.gold.devops.gov.bc.ca" (include "sso-keycloak.fullname" .) .Values.namespace | quote }}
+            - name: KC_HOSTNAME_URL
+              value: {{ printf "https://%s-%s.apps.gold.devops.gov.bc.ca/auth/" (include "sso-keycloak.fullname" .) .Values.namespace | quote }}
             - name: KC_HOSTNAME_ADMIN_URL
-              value: {{ printf "https://%s-%s.apps.gold.devops.gov.bc.ca/" (include "sso-keycloak.fullname" .) .Values.namespace | quote }}
-            - name: KC_PROXY
-              value: edge
-            - name: KC_HTTP_ENABLED
-              value: "true"
+              value: {{ printf "https://%s-%s.apps.gold.devops.gov.bc.ca/auth/" (include "sso-keycloak.fullname" .) .Values.namespace | quote }}
+            - name: KC_HTTP_RELATIVE_PATH
+              value: "/auth"
           volumeMounts:
             {{- if .Values.tls.enabled }}
             - mountPath: /etc/x509/https
