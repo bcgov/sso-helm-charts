@@ -16,7 +16,7 @@ route:
   host:
 
 env:
-  SERVER_HOST: 'localhost'
+  APP_URI: "https://saml-playground-c6af30-dev.apps.gold.devops.gov.bc.ca"
   SERVER_PORT: 8080
 
 resources:
