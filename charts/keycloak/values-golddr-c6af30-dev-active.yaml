@@ -3,7 +3,7 @@ image:
   tag: dev-rhbk-24
   pullPolicy: Always
 
-additionalServerOptions: "-Dkeycloak.profile.feature.impersonation=disabled -Djboss.persistent.log.dir=/var/log/eap -Djgroups.dns.query=sso-keycloak-ping.c6af30-test.svc.cluster.local"
+additionalServerOptions: "-Dkeycloak.profile.feature.impersonation=disabled -Djboss.persistent.log.dir=/var/log/eap -Djgroups.dns.query=sso-keycloak-ping.c6af30-dev.svc.cluster.local"
 
 replicaCount: 3
 
