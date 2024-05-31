@@ -1,0 +1,87 @@
+image:
+  repository: ghcr.io/bcgov/sso
+  tag: dev-rhbk-24
+  pullPolicy: Always
+
+additionalServerOptions: "-Dkeycloak.profile.feature.impersonation=disabled -Djboss.persistent.log.dir=/var/log/eap -Djgroups.dns.query=sso-keycloak-ping.c6af30-test.svc.cluster.local"
+
+replicaCount: 3
+
+namespace: c6af30-prod
+cluster: golddr
+
+nameOverride: sso-keycloak
+
+fullnameOverride: sso-keycloak
+
+project: sso-keycloak
+
+readinessProbe:
+  enabled: true
+  verification:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 12
+
+livenessProbe:
+  enabled: true
+  verification:
+  initialDelaySeconds: 240
+  periodSeconds: 20
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 6
+
+service:
+  type: ClusterIP
+  port: 8080
+
+tls:
+  enabled: false
+
+persistentLog:
+  size: 1Gi
+
+maintenancePage:
+  enabled: false
+  active: false
+
+postgres:
+  host: sso-patroni
+  database: ssokeycloak
+  port: 5432
+  credentials:
+    secret: sso-patroni-appusers
+    usernameKey: username-appuser1
+    passwordKey: password-appuser1
+  poolSize:
+    min: 5
+    max: 20
+
+patroni:
+  image:
+    repository: ghcr.io/zalando/spilo-15
+    tag: 3.2-p1
+    pullPolicy: Always
+
+  postgresMajorVersion: 15
+
+  nameOverride: sso-patroni
+
+  fullnameOverride: sso-patroni
+
+  replicaCount: 3
+
+  persistentVolume:
+    size: 1Gi
+
+  podDisruptionBudget:
+    enabled: false
+
+  transportServerClaim:
+    enabled: false
+
+  walG:
+    enabled: false
