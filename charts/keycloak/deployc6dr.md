@@ -1,5 +1,8 @@
 When logged into the DR cluster, run these.
+build the helm chart in the repos:
+sso-helm-charts/charts/keycloak/Chart.yaml
 
+With command `helm package .`
 
 ```
 helm upgrade --install "sso-keycloak" ./sso-keycloak-1.14.4.tgz \
