@@ -44,6 +44,7 @@ spec:
                   if not exists (select from pg_catalog.pg_roles where rolname = '$username') then
                     create role $username login password '$password';
                     grant all privileges on database $username to $username;
+                    grant all on schema public to $username;
                   end if;
                 end
                 \$do\$;
