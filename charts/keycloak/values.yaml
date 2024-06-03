@@ -117,6 +117,18 @@ affinityTemplate: |
         labelSelector:
           matchLabels: {{ include "sso-keycloak.selectorLabels" . | nindent 10 }}
 
+podDisruptionBudget:
+  enabled: false
+  minAvailable:
+  maxUnavailable:
+
+serviceAccount:
+  create: true
+
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
+
 patroni:
   replicaCount: 3
   # RH-SSO v7.5-9 is not tested with PostgreSQL 14
