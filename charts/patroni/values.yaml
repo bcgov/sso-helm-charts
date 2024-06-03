@@ -2,15 +2,15 @@ replicaCount: 3
 
 image:
   # see https://github.com/zalando/spilo/releases
-  repository: registry.opensource.zalan.do/acid/spilo-14
+  repository: ghcr.io/zalando/spilo-15
   pullPolicy: Always
-  tag: 2.1-p5
+  tag: 3.2-p1
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-postgresMajorVersion: 14
+postgresMajorVersion: 15
 
 # Credentials used by Patroni
 credentials:
