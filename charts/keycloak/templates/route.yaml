@@ -6,6 +6,7 @@ metadata:
   annotations:
     haproxy.router.openshift.io/balance: roundrobin
     haproxy.router.openshift.io/disable_cookies: 'true'
+    haproxy.router.openshift.io/rewrite-target: /auth
     {{ if .Values.annotations.timeout }}
     haproxy.router.openshift.io/timeout: {{ .Values.annotations.timeout }}
     {{ end }}

@@ -184,12 +184,11 @@ spec:
               value: America/Vancouver
             - name: KC_HOSTNAME_STRICT_HTTPS
               value: "true"
-            - name: KC_HOSTNAME_URL
-              value: {{ printf "https://%s-%s.apps.gold.devops.gov.bc.ca/auth/" (include "sso-keycloak.fullname" .) .Values.namespace | quote }}
-            - name: KC_HOSTNAME_ADMIN_URL
-              value: {{ printf "https://%s-%s.apps.gold.devops.gov.bc.ca/auth/" (include "sso-keycloak.fullname" .) .Values.namespace | quote }}
             - name: KC_HTTP_RELATIVE_PATH
               value: "/auth"
+          {{ with .Values.extraEnvs }}
+            {{- toYaml . | nindent 12 }}
+          {{ end }}
           volumeMounts:
             {{- if .Values.tls.enabled }}
             - mountPath: /etc/x509/https
