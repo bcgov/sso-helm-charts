@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/bcgov/sso
-  tag: 7.6.2-build.2
+  tag: dev-rhbk-24
   pullPolicy: Always
 
 project: sso-keycloak
@@ -131,12 +131,13 @@ rbac:
 
 patroni:
   replicaCount: 3
-  # RH-SSO v7.5-9 is not tested with PostgreSQL 14
-  image:
-    repository: registry.opensource.zalan.do/acid/spilo-13
-    tag: 2.1-p1
 
-  postgresMajorVersion: 13
+  image:
+    repository: ghcr.io/zalando/spilo-15
+    tag: 3.2-p1
+    pullPolicy: Always
+
+  postgresMajorVersion: 15
 
   project: sso-keycloak
   nameOverride: sso-patroni
