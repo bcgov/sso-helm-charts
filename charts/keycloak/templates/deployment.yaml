@@ -1,5 +1,4 @@
 {{- $configDir := "/opt/eap/standalone/configuration" -}}
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -55,15 +54,18 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           command: ["/bin/sh", "-c"]
+          # args:
+          #   - |
+          #     base_config={{ $configDir }}-provisioning/standalone-openshift.xml
+          #     target_config={{ $configDir }}/standalone-openshift.xml
+          #     if [[ -f "$base_config" ]]; then
+          #         rm "$target_config"
+          #         cp "$base_config" "$target_config"
+          #     fi;
+          #     /opt/keycloak/bin/kc.sh;
           args:
             - |
-              base_config={{ $configDir }}-provisioning/standalone-openshift.xml
-              target_config={{ $configDir }}/standalone-openshift.xml
-              if [[ -f "$base_config" ]]; then
-                  rm "$target_config"
-                  cp "$base_config" "$target_config"
-              fi;
-              /opt/eap/bin/openshift-launch.sh;
+              /opt/keycloak/bin/kc.sh start
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
           {{- if eq .Values.livenessProbe.verification "script"}}
@@ -74,7 +76,7 @@ spec:
               - timeout 60 /opt/eap/bin/livenessProbe.sh
           {{- else }}
             httpGet:
-              path: /auth/realms/master/.well-known/openid-configuration
+              path: /auth/health/live
               port: 8080
           {{- end -}}
           {{ (omit .Values.livenessProbe "enabled" "verification") | toYaml | nindent 12 }}
@@ -90,7 +92,7 @@ spec:
               - timeout 60 /opt/eap/bin/readinessProbe.sh
           {{- else }}
             httpGet:
-              path: /auth/realms/master/.well-known/openid-configuration
+              path: /auth/health/ready
               port: 8080
           {{- end -}}
           {{ (omit .Values.readinessProbe "enabled" "verification") | toYaml | nindent 12 }}
@@ -110,12 +112,12 @@ spec:
               protocol: TCP
           env:
             # Postgres Service Endpoint
-            - name: DB_POSTGRESQL_SERVICE_HOST
-              value: {{ .Values.postgres.host }}
-            - name: DB_POSTGRESQL_SERVICE_PORT
-              value: {{ .Values.postgres.port | quote }}
+            - name: KC_DB
+              value: postgres
+            - name: KC_DB_URL
+              value: {{ printf "jdbc:postgresql://%s:%d/%s" .Values.postgres.host (.Values.postgres.port | int) .Values.postgres.database | quote}}
             # DB Credentials
-            - name: DB_USERNAME
+            - name: KC_DB_USERNAME
               {{- if and .Values.postgres.credentials.secret .Values.postgres.credentials.usernameKey }}
               valueFrom:
                 secretKeyRef:
@@ -124,7 +126,7 @@ spec:
               {{- else -}}
               value: {{ .Values.postgres.credentials.username }}
               {{- end }}
-            - name: DB_PASSWORD
+            - name: KC_DB_PASSWORD
               {{- if and .Values.postgres.credentials.secret .Values.postgres.credentials.passwordKey }}
               valueFrom:
                 secretKeyRef:
@@ -133,15 +135,15 @@ spec:
               {{- else -}}
               value: {{ .Values.postgres.credentials.password }}
               {{- end }}
-            - name: DB_DATABASE
+            - name: KC_DB_URL_DATABASE
               value: {{ .Values.postgres.database }}
             # DB Admin Credentials
-            - name: SSO_ADMIN_USERNAME
+            - name: KEYCLOAK_ADMIN
               valueFrom:
                 secretKeyRef:
                   name: {{ include "sso-keycloak.fullname" . }}-admin
                   key: username
-            - name: SSO_ADMIN_PASSWORD
+            - name: KEYCLOAK_ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: {{ include "sso-keycloak.fullname" . }}-admin
@@ -180,6 +182,13 @@ spec:
               value: db-postgresql=DB
             - name: TZ
               value: America/Vancouver
+            - name: KC_HOSTNAME_STRICT_HTTPS
+              value: "true"
+            - name: KC_HTTP_RELATIVE_PATH
+              value: "/auth"
+          {{ with .Values.extraEnvs }}
+            {{- toYaml . | nindent 12 }}
+          {{ end }}
           volumeMounts:
             {{- if .Values.tls.enabled }}
             - mountPath: /etc/x509/https
