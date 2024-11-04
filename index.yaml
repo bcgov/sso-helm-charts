@@ -299,6 +299,16 @@ entries:
   sso-keycloak:
   - apiVersion: v1
     appVersion: 24.0.5-build.1
+    created: "2024-11-04T23:13:21.207791143Z"
+    description: Open Source Identity and Access Management For Modern Applications
+      and Services
+    digest: 975e3b375738f44c086ade52a20f4c941d1acba53e2d2206cae82675fa7afe6e
+    name: sso-keycloak
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.16.1/sso-keycloak-1.16.1.tgz
+    version: 1.16.1
+  - apiVersion: v1
+    appVersion: 24.0.5-build.1
     created: "2024-07-08T21:53:42.304918081Z"
     description: Open Source Identity and Access Management For Modern Applications
       and Services
@@ -348,6 +358,16 @@ entries:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.4/sso-keycloak-1.14.4.tgz
     version: 1.14.4
   - apiVersion: v1
+    appVersion: 7.6.5-build.28
+    created: "2023-02-27T17:57:56.112088049Z"
+    description: Open Source Identity and Access Management For Modern Applications
+      and Services
+    digest: f942cb15002273f4eede7f04cd6fd9697a5addfbbec7b50519884468471bf2e5
+    name: sso-keycloak
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.4-nodep/sso-keycloak-1.14.4-nodep.tgz
+    version: 1.14.4-nodep
+  - apiVersion: v1
     appVersion: 7.6.25-build.1
     created: "2023-08-18T23:27:25.37967443Z"
     description: Open Source Identity and Access Management For Modern Applications
@@ -359,10 +379,10 @@ entries:
     version: 1.14.4-nodep
   - apiVersion: v1
     appVersion: 7.6.25-build.1
-    created: "2023-08-19T00:08:51.03501525Z"
+    created: "2023-08-18T22:57:18.724960798Z"
     description: Open Source Identity and Access Management For Modern Applications
       and Services
-    digest: 2ba73ea97c7e579cdd1cb87aa04ccc88a44247442b5560d526f4a14512884fe8
+    digest: 1466a316ef1875198ed4b0aebb48caad1ca4013b78b1aac1a752c8285ed53770
     name: sso-keycloak
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.4-nodep/sso-keycloak-1.14.4-nodep.tgz
@@ -379,20 +399,10 @@ entries:
     version: 1.14.4-nodep
   - apiVersion: v1
     appVersion: 7.6.25-build.1
-    created: "2023-08-18T22:57:18.724960798Z"
+    created: "2023-08-19T00:08:51.03501525Z"
     description: Open Source Identity and Access Management For Modern Applications
       and Services
-    digest: 1466a316ef1875198ed4b0aebb48caad1ca4013b78b1aac1a752c8285ed53770
-    name: sso-keycloak
-    urls:
-    - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.4-nodep/sso-keycloak-1.14.4-nodep.tgz
-    version: 1.14.4-nodep
-  - apiVersion: v1
-    appVersion: 7.6.5-build.28
-    created: "2023-02-27T17:57:56.112088049Z"
-    description: Open Source Identity and Access Management For Modern Applications
-      and Services
-    digest: f942cb15002273f4eede7f04cd6fd9697a5addfbbec7b50519884468471bf2e5
+    digest: 2ba73ea97c7e579cdd1cb87aa04ccc88a44247442b5560d526f4a14512884fe8
     name: sso-keycloak
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.4-nodep/sso-keycloak-1.14.4-nodep.tgz
@@ -439,20 +449,20 @@ entries:
     version: 1.14.3-nodep
   - apiVersion: v1
     appVersion: 7.6.5-build.29
-    created: "2023-03-21T23:24:36.380713192Z"
+    created: "2023-03-21T23:31:50.258683308Z"
     description: Open Source Identity and Access Management For Modern Applications
       and Services
-    digest: acd39fdc7b7be342572c9a75bd8996ad401683237e6301838727d8f9296de0c2
+    digest: 21ac9c2ca9a70307e15dc7a7030fa9eda1323de866b0993fd47306da13d800d8
     name: sso-keycloak
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.3-nodep/sso-keycloak-1.14.3-nodep.tgz
     version: 1.14.3-nodep
   - apiVersion: v1
     appVersion: 7.6.5-build.29
-    created: "2023-03-21T23:31:50.258683308Z"
+    created: "2023-03-21T23:24:36.380713192Z"
     description: Open Source Identity and Access Management For Modern Applications
       and Services
-    digest: 21ac9c2ca9a70307e15dc7a7030fa9eda1323de866b0993fd47306da13d800d8
+    digest: acd39fdc7b7be342572c9a75bd8996ad401683237e6301838727d8f9296de0c2
     name: sso-keycloak
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sso-keycloak-1.14.3-nodep/sso-keycloak-1.14.3-nodep.tgz
@@ -878,4 +888,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2024-07-08T21:53:42.305479534Z"
+generated: "2024-11-04T23:13:21.208370331Z"
