@@ -14,4 +14,5 @@ spec:
   {{- end }}
   selector:
     matchLabels: {{ include "sso-keycloak.selectorLabels" . | nindent 6 }}
+  unhealthyPodEvictionPolicy: AlwaysAllow
 {{- end }}
