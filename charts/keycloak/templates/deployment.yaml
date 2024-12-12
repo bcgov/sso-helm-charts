@@ -65,7 +65,7 @@ spec:
           #     /opt/keycloak/bin/kc.sh;
           args:
             - |
-              /opt/keycloak/bin/kc.sh start --features-disabled=persistent-user-sessions
+              /opt/keycloak/bin/kc.sh start --optimized
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
           {{- if eq .Values.livenessProbe.verification "script"}}
@@ -156,8 +156,6 @@ spec:
               value: {{ .Values.additionalServerOptions }}
             - name: TZ
               value: America/Vancouver
-            - name: KC_HTTP_RELATIVE_PATH
-              value: "/auth"
           {{ with .Values.extraEnvs }}
             {{- toYaml . | nindent 12 }}
           {{ end }}
