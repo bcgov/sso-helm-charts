@@ -1,6 +1,6 @@
 {{- $configDir := "/opt/eap/standalone/configuration" -}}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "sso-keycloak.fullname" . }}
   labels: {{ include "sso-keycloak.labels" . | nindent 4 }}
@@ -14,6 +14,7 @@ spec:
   minReadySeconds: 30 # The minimum number of seconds for which a newly created Pod should be ready
   selector:
     matchLabels: {{ include "sso-keycloak.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "sso-keycloak.fullname" . }}-ping
   template:
     metadata:
       {{- if .Values.configuration.enabled }}
@@ -65,7 +66,7 @@ spec:
           #     /opt/keycloak/bin/kc.sh;
           args:
             - |
-              /opt/keycloak/bin/kc.sh start
+              /opt/keycloak/bin/kc.sh start --optimized
           {{- if .Values.livenessProbe.enabled }}
           livenessProbe:
           {{- if eq .Values.livenessProbe.verification "script"}}
@@ -123,7 +124,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.postgres.credentials.secret }}
                   key: {{ .Values.postgres.credentials.usernameKey }}
-              {{- else -}}
+              {{- else }}
               value: {{ .Values.postgres.credentials.username }}
               {{- end }}
             - name: KC_DB_PASSWORD
@@ -132,7 +133,7 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.postgres.credentials.secret }}
                   key: {{ .Values.postgres.credentials.passwordKey }}
-              {{- else -}}
+              {{- else }}
               value: {{ .Values.postgres.credentials.password }}
               {{- end }}
             - name: KC_DB_URL_DATABASE
