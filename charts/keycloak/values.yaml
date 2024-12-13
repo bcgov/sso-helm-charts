@@ -1,8 +1,8 @@
-replicaCount: 2
+replicaCount: 1
 
 image:
   repository: ghcr.io/bcgov/sso
-  tag:  24.0.8-build.1
+  tag:  24.0.5-build.1
   pullPolicy: Always
 
 project: sso-keycloak
@@ -19,7 +19,7 @@ networkPolicies:
 
 service:
   type: ClusterIP
-  port: 8443
+  port: 8080
 
 # see https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/7.0/html-single/red_hat_jboss_enterprise_application_platform_for_openshift/index#configuring_dns_ping
 pingService:
@@ -37,8 +37,8 @@ maintenancePage:
   resources: {}
 
 admin:
-  username: admin
-  password: admin
+  username:
+  password:
 
 postgres:
   host: sso-patroni
@@ -62,11 +62,11 @@ additionalServerOptions: "-Dkeycloak.profile.feature.authorization=enabled -Djbo
 
 # see https://github.com/keycloak/keycloak-containers/blob/master/server/README.md#setting-up-tlsssl
 tls:
-  enabled: true
+  enabled: false
 
 persistentLog:
   enabled: true
-  size: 2Gi
+  size: 5Gi
   storageClass: netapp-file-standard
   mountPath: /var/log/eap
   annotations: {}
@@ -75,10 +75,10 @@ persistentLog:
 
 resources:
   limits:
-    cpu: 1
+    cpu: 2
     memory: 2Gi
   requests:
-    cpu: 0.8
+    cpu: 200m
     memory: 1Gi
 
 rollingUpdate: {}
@@ -130,7 +130,7 @@ rbac:
   create: true
 
 patroni:
-  replicaCount: 2
+  replicaCount: 3
 
   image:
     repository: ghcr.io/zalando/spilo-15
@@ -148,14 +148,10 @@ patroni:
       password:
 
   persistentVolume:
-    size: 1Gi
+    size: 10Gi
 
   podDisruptionBudget:
-    enabled: false
+    enabled: true
 
-  transportServerClaim:
-    enabled: false
-
-maintenancePage:
-  enabled: false
-  active: false
+tags:
+  patroni-enabled: true
