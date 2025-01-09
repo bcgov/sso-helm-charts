@@ -68,8 +68,8 @@ spec:
               - timeout 60 /opt/eap/bin/livenessProbe.sh
           {{- else }}
             httpGet:
-              path: /health/live
-              port: 8080
+              path: /auth/health/live
+              port: 9000
           {{- end -}}
           {{ (omit .Values.livenessProbe "enabled" "verification") | toYaml | nindent 12 }}
           {{- end }}
@@ -84,8 +84,8 @@ spec:
               - timeout 60 /opt/eap/bin/readinessProbe.sh
           {{- else }}
             httpGet:
-              path: /health/ready
-              port: 8080
+              path: /auth/health/ready
+              port: 9000
           {{- end -}}
           {{ (omit .Values.readinessProbe "enabled" "verification") | toYaml | nindent 12 }}
           {{- end }}
@@ -146,22 +146,10 @@ spec:
               value: {{ .Values.additionalServerOptions }}
             - name: TZ
               value: America/Vancouver
-            - name: KC_HOSTNAME_STRICT_HTTPS
-              value: "true"
-            - name: KC_HTTP_RELATIVE_PATH
-              value: "/auth"
           {{ with .Values.extraEnvs }}
             {{- toYaml . | nindent 12 }}
           {{ end }}
           volumeMounts:
-            {{- if .Values.tls.enabled }}
-            - mountPath: /etc/x509/https
-              name: sso-x509-https-volume
-              readOnly: true
-            - mountPath: /etc/x509/jgroups
-              name: sso-x509-jgroups-volume
-              readOnly: true
-            {{- end }}
             {{- if .Values.persistentLog.enabled }}
             - mountPath: {{ .Values.persistentLog.mountPath }}
               name: logs-volume
@@ -179,16 +167,6 @@ spec:
       affinity: {{ tpl .Values.affinityTemplate . | nindent 8 }}
       {{- end }}
       volumes:
-        {{- if .Values.tls.enabled }}
-        - name: sso-x509-https-volume
-          secret:
-            defaultMode: 420
-            secretName: {{ include "sso-keycloak.fullname" . }}-x509-https
-        - name: sso-x509-jgroups-volume
-          secret:
-            defaultMode: 420
-            secretName: {{ include "sso-keycloak.fullname" . }}-x509-jgroups
-        {{- end }}
         {{- if .Values.persistentLog.enabled }}
         - name: logs-volume
           persistentVolumeClaim:
