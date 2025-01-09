@@ -5,6 +5,10 @@ metadata:
   labels: {{ include "sso-keycloak.labels" . | nindent 4 }}
   annotations:
     description: "The headless service for the keycloak stateful set."
+    {{- if .Values.tls.enabled }}
+    # see https://miminar.fedorapeople.org/_preview/openshift-enterprise/registry-redeploy/dev_guide/secrets.html#service-serving-certificate-secrets
+    service.alpha.openshift.io/serving-cert-secret-name: {{ include "sso-keycloak.fullname" . }}-x509-jgroups
+    {{- end }}
 spec:
   clusterIP: None
   ports:
