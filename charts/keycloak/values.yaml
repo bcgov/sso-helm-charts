@@ -155,3 +155,9 @@ patroni:
 
 tags:
   patroni-enabled: true
+
+extraEnvs:
+  - name: KC_HOSTNAME
+    value:
+  - name: KC_HOSTNAME_ADMIN
+    value:
