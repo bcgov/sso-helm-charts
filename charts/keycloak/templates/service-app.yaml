@@ -20,4 +20,10 @@ spec:
       name: http
       targetPort: http
       {{ end }}
+    {{- if .Values.managementInterface.enabled }}
+    - port: {{ .Values.managementInterface.port }}
+      protocol: TCP
+      name: management-http
+      targetPort: management
+    {{- end }}
   selector: {{ include "sso-keycloak.selectorLabels" . | nindent 4 }}

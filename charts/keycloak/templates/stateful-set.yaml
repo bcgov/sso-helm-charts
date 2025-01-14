@@ -99,6 +99,11 @@ spec:
             - containerPort: 8443
               name: https
               protocol: TCP
+            {{- if .Values.managementInterface.enabled }}
+            - containerPort: 9000
+              name: management
+              protocol: TCP
+            {{- end }}
           env:
             # Postgres Service Endpoint
             - name: KC_DB
