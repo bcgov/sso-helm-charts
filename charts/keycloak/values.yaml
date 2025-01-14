@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: ghcr.io/bcgov/sso
-  tag:  24.0.5-build.1
+  tag: 24.0.5-build.1
   pullPolicy: Always
 
 project: sso-keycloak
@@ -25,6 +25,10 @@ service:
 pingService:
   enabled: true
   port: 8888
+
+managementInterface:
+  enabled: true
+  port: 9000
 
 maintenancePage:
   enabled: false
