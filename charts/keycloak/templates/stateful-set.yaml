@@ -17,11 +17,19 @@ spec:
   serviceName: {{ include "sso-keycloak.fullname" . }}-ping
   template:
     metadata:
-      {{- if .Values.configuration.enabled }}
+      {{- if or .Values.configuration.enabled .Values.managementInterface.enabled }}
       annotations:
+        {{ if .Values.configuration.enabled }}
         checksum/config: {{ include (print $.Template.BasePath "/config.yaml") . | sha256sum }}
-      {{- end }}
+        {{ end }}
+        {{ if .Values.managementInterface.enabled }}
+        prometheus.io/path: "/auth/metrics"
+        prometheus.io/port: "9000"
+        prometheus.io/scrape: "true"
+        {{ end }}
+       {{- end }}
       labels: {{ include "sso-keycloak.labels" . | nindent 8 }}
+
     spec:
       initContainers:
         - name: {{ .Chart.Name }}-init
