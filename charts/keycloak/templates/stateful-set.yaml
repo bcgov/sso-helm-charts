@@ -7,7 +7,7 @@ metadata:
 spec:
   replicas: {{ .Values.replicaCount }}
   {{- if .Values.rollingUpdate }}
-  strategy:
+  updateStrategy:
     type: RollingUpdate
     rollingUpdate: {{ .Values.rollingUpdate | toYaml | nindent 6 }}
   {{- end }}
