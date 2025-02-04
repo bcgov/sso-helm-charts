@@ -171,6 +171,10 @@ spec:
         - containerPort: 8008
         - containerPort: 5432
         volumeMounts:
+        {{- if .Values.shmVolume.enabled }}
+        - mountPath: /dev/shm
+          name: shm-volume-mount
+        {{- end }}
         - name: storage-volume
           mountPath: "{{ .Values.persistentVolume.mountPath }}"
           subPath: "{{ .Values.persistentVolume.subPath }}"
@@ -212,6 +216,12 @@ spec:
       {{- if not .Values.persistentVolume.enabled }}
       - name: storage-volume
         emptyDir: {}
+      {{- end }}
+      {{- if .Values.shmVolume.enabled }}
+      - name: shm-volume-mount
+        emptyDir:
+          medium: Memory
+          sizeLimit: {{.Values.shmVolume.size }}
       {{- end }}
       {{- if and (.Values.walG.enabled) (eq .Values.walG.storage "pvc") }}
       - name: backups-volume
