@@ -100,9 +100,7 @@ The following table lists the configurable parameters of the patroni chart and t
 | `persistentVolume.mountPath`     | Persistent Volume mount root path                                                                                              | `/home/postgres/pgdata`                             |
 | `persistentVolume.size`          | Persistent Volume size                                                                                                         | `2Gi`                                               |
 | `persistentVolume.storageClass`  | Persistent Volume Storage Class                                                                                                | `volume.alpha.kubernetes.io/storage-class: default` |
-| `persistentVolume.subPath`       | Subdirectory of Persistent Volume to mount                                                                                     | `""`
-| `shmVolume.enabled`  | Enable the shm folder volume and mount | `false` |
-| `shmVolume.size`  | Size aloted to the shm folder | `307` |                                                |
+| `persistentVolume.subPath`       | Subdirectory of Persistent Volume to mount                                                                                     | `""`                                                |
 | `rbac.create`                    | Create required role and rolebindings                                                                                          | `true`                                              |
 | `serviceAccount.create`          | If true, create a new service account                                                                                          | `true`                                              |
 | `serviceAccount.name`            | Service account to be used. If not set and `serviceAccount.create` is `true`, a name is generated using the fullname template  | `nil`                                               |

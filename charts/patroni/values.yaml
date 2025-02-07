@@ -113,10 +113,6 @@ persistentVolume:
   accessModes:
     - ReadWriteOnce
 
-shmVolume:
-  enabled: false
-  size: 307Mi
-
 resources:
   {}
   # We usually recommend not to specify default resources and to leave this as a conscious
