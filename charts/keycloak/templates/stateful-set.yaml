@@ -150,6 +150,32 @@ spec:
                 secretKeyRef:
                   name: {{ include "sso-keycloak.fullname" . }}-admin
                   key: password
+            # OTP Credentials
+            - name: PPID_API_TOKEN_URL
+              valueFrom:
+                secretKeyRef:
+                  name: otp-credentials
+                  key: PPID_API_TOKEN_URL
+            - name: PPID_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: otp-credentials
+                  key: PPID_API_URL
+            - name: PPID_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: otp-credentials
+                  key: PPID_CLIENT_ID
+            - name: PPID_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: otp-credentials
+                  key: PPID_CLIENT_SECRET
+            - name: PPID_OTP_ISSUER
+              valueFrom:
+                secretKeyRef:
+                  name: otp-credentials
+                  key: PPID_OTP_ISSUER
             - name: JAVA_OPTS_APPEND
               value: {{ .Values.additionalServerOptions }}
             - name: TZ
