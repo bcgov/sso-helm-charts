@@ -168,8 +168,8 @@ extraEnvs:
 
 otpCredentials:
   recreateCredentials: false
-  apiTokenUrl: ""
-  apiUrl: ""
-  clientID: ""
-  clientSecret: ""
-  otpIssuer: ""
+  # apiTokenUrl: ""
+  # apiUrl: ""
+  # clientID: ""
+  # clientSecret: ""
+  # otpIssuer: ""
