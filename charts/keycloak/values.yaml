@@ -165,3 +165,11 @@ extraEnvs:
     value:
   - name: KC_HOSTNAME_ADMIN
     value:
+
+otpCredentials:
+  recreateCredentials: false
+  apiTokenUrl: ""
+  apiUrl: ""
+  clientID: ""
+  clientSecret: ""
+  otpIssuer: ""

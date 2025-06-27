@@ -85,13 +85,22 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `readinessProbe.verification`      | readinessProbe option; `script \| http`                          | `script`                                                                                   |
 | `rollingUpdate`                    | rolling update process settings                                  | `{}`                                                                                       |
 | `annotations.timeout`                | route timeout                                  | ""
+| `otpCredentials.recreateCredentials` | bool, to force create fresh otp credentials on upgrade      | false
+| `otpCredentials.apiTokenUrl` | one time password token url     | ""
+| `otpCredentials.apiUrl` | one time password      | ""
+| `otpCredentials.clientID` | one time password      | ""
+| `otpCredentials.clientSecret` | one time password      | ""
+| `otpCredentials.otpIssuer` | one time password      | ""
+
+
 
 ### Notes
 
-- The helm chart installs two `Secret` k8s objects:
+- The helm chart installs three `Secret` k8s objects:
 
   1. `<release-name>-admin`: it stores the Keycloak admin password.
   2. `<release-name>-jgroups`: it stores the Keycloak cluster jgroups password.
+  3. `otp-credentials`: the credentials used for one time password creation.  If these values are left blank. The credentials must be manually added to the secret and the keycloak pods cycled.
 
 - It is recommended to use `--set-file` option when defining the user-defined configuration.
 
