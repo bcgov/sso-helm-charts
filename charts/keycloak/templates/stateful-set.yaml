@@ -112,6 +112,12 @@ spec:
               name: management
               protocol: TCP
             {{- end }}
+            - containerPort: 7800
+              name: jgroups-bind
+              protocol: TCP
+            - containerPort: 57800
+              name: jgroups-fd
+              protocol: TCP
           env:
             # Postgres Service Endpoint
             - name: KC_DB
