@@ -96,8 +96,6 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `appSecrets.rbaApiUrl` | risk based authn | ""
 | `appSecrets.rbaTokenUrl` | risk based authn | ""
 
-
-
 ### Notes
 
 - The helm chart installs three `Secret` k8s objects:
