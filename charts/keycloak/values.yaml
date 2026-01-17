@@ -166,10 +166,14 @@ extraEnvs:
   - name: KC_HOSTNAME_ADMIN
     value:
 
-otpCredentials:
+appSecrets:
   recreateCredentials: false
-  # apiTokenUrl: ""
-  # apiUrl: ""
-  # clientID: ""
-  # clientSecret: ""
-  # otpIssuer: ""
+  # ppidTokenUrl: ""
+  # ppidApiUrl: ""
+  # ppidClientID: ""
+  # ppidClientSecret: ""
+  # ppidIssuer: ""
+  # rbaClientID: ""
+  # rbaClientSecret: ""
+  # rbaApiUrl: ""
+  # rbaTokenUrl: ""
