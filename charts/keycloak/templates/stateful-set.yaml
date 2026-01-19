@@ -157,11 +157,11 @@ spec:
                   name: {{ include "sso-keycloak.fullname" . }}-admin
                   key: password
             # OTP Credentials
-            - name: PPID_API_TOKEN_URL
+            - name: PPID_TOKEN_URL
               valueFrom:
                 secretKeyRef:
                   name: {{ include "sso-keycloak.fullname" . }}-app-secrets
-                  key: PPID_API_TOKEN_URL
+                  key: PPID_TOKEN_URL
             - name: PPID_API_URL
               valueFrom:
                 secretKeyRef:
@@ -177,11 +177,31 @@ spec:
                 secretKeyRef:
                   name: {{ include "sso-keycloak.fullname" . }}-app-secrets
                   key: PPID_CLIENT_SECRET
-            - name: PPID_OTP_ISSUER
+            - name: PPID_ISSUER
               valueFrom:
                 secretKeyRef:
                   name: {{ include "sso-keycloak.fullname" . }}-app-secrets
-                  key: PPID_OTP_ISSUER
+                  key: PPID_ISSUER
+            - name: RBA_TOKEN_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
+                  key: RBA_TOKEN_URL
+            - name: RBA_API_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
+                  key: RBA_API_URL
+            - name: RBA_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
+                  key: RBA_CLIENT_ID
+            - name: RBA_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
+                  key: RBA_CLIENT_SECRET
             - name: JAVA_OPTS_APPEND
               value: {{ .Values.additionalServerOptions }}
             - name: TZ
