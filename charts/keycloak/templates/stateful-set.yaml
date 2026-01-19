@@ -160,27 +160,27 @@ spec:
             - name: PPID_API_TOKEN_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "sso-keycloak.fullname" . }}-otp-credentials
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
                   key: PPID_API_TOKEN_URL
             - name: PPID_API_URL
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "sso-keycloak.fullname" . }}-otp-credentials
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
                   key: PPID_API_URL
             - name: PPID_CLIENT_ID
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "sso-keycloak.fullname" . }}-otp-credentials
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
                   key: PPID_CLIENT_ID
             - name: PPID_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "sso-keycloak.fullname" . }}-otp-credentials
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
                   key: PPID_CLIENT_SECRET
             - name: PPID_OTP_ISSUER
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "sso-keycloak.fullname" . }}-otp-credentials
+                  name: {{ include "sso-keycloak.fullname" . }}-app-secrets
                   key: PPID_OTP_ISSUER
             - name: JAVA_OPTS_APPEND
               value: {{ .Values.additionalServerOptions }}

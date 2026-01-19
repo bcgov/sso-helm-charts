@@ -102,7 +102,7 @@ The following table lists the configurable parameters of the Keycloak chart and 
 
   1. `<release-name>-admin`: it stores the Keycloak admin password.
   2. `<release-name>-jgroups`: it stores the Keycloak cluster jgroups password.
-  3. `otp-credentials`: the credentials used for one time password creation.  If these values are left blank. The credentials must be manually added to the secret and the keycloak pods cycled.
+  3. `<release-name>-app-secrets`: the credentials used by keycloak custom SPIs.  If these values are left blank. The credentials must be manually added to the secret and the keycloak pods cycled.
 
 - It is recommended to use `--set-file` option when defining the user-defined configuration.
 
