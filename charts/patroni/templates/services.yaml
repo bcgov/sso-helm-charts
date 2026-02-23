@@ -4,7 +4,7 @@ metadata:
   name: {{ template "patroni.fullname" . }}
   labels: {{ include "patroni.labels" . | nindent 4 }}
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
   - name: postgresql
     port: 5432
