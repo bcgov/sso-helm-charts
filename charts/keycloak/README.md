@@ -85,16 +85,6 @@ The following table lists the configurable parameters of the Keycloak chart and 
 | `readinessProbe.verification`      | readinessProbe option; `script \| http`                          | `script`                                                                                   |
 | `rollingUpdate`                    | rolling update process settings                                  | `{}`                                                                                       |
 | `annotations.timeout`                | route timeout                                  | ""
-| `appSecrets.recreateCredentials` | bool, to force create fresh otp credentials on upgrade      | false
-| `appSecrets.ppidTokenUrl` | one time password token url     | ""
-| `appSecrets.ppidApiUrl` | one time password      | ""
-| `appSecrets.ppidClientID` | one time password      | ""
-| `appSecrets.ppidClientSecret` | one time password      | ""
-| `appSecrets.ppidIssuer` | one time password      | ""
-| `appSecrets.rbaClientId` | risk based authn | ""
-| `appSecrets.rbaClientSecret` | risk based authn | ""
-| `appSecrets.rbaApiUrl` | risk based authn | ""
-| `appSecrets.rbaTokenUrl` | risk based authn | ""
 
 ### Notes
 
