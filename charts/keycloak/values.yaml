@@ -164,15 +164,3 @@ extraEnvs:
     value:
   - name: KC_HOSTNAME_ADMIN
     value:
-
-appSecrets:
-  recreateCredentials: false
-  # ppidTokenUrl: ""
-  # ppidApiUrl: ""
-  # ppidClientID: ""
-  # ppidClientSecret: ""
-  # ppidIssuer: ""
-  # rbaClientID: ""
-  # rbaClientSecret: ""
-  # rbaApiUrl: ""
-  # rbaTokenUrl: ""
