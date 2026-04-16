@@ -6,7 +6,6 @@ jobs:
   pre-commit:
     runs-on: ubuntu-24.04
     steps:
-      - uses: hmarr/debug-action@v3
       - uses: actions/checkout@v4
       - name: Install asdf requirements
         run: |
