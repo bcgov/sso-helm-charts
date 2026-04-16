@@ -9,15 +9,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Install asdf requirements
         run: |
-          sudo apt-get update
           sudo apt-get install -y libssl-dev libreadline-dev uuid-dev
       - name: Install asdf
         uses: asdf-vm/actions/setup@v3
       - name: Cache tools
         uses: actions/cache@v4
         with:
-          path: |
-            /home/runner/.asdf
+          path: /home/runner/.asdf
           key: ${{ runner.os }}-${{ hashFiles('**/.tool-versions') }}
       - name: Install required tools
         run: |
