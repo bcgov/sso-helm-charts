@@ -12,6 +12,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libssl-dev libreadline-dev uuid-dev
 
+
+      - name: Setup asdf
+        uses: asdf-vm/actions/setup@v3
+
       - name: Install asdf
         uses: asdf-vm/actions/setup@v3
 
@@ -22,11 +26,10 @@ jobs:
             /home/runner/.asdf
           key: ${{ runner.os }}-${{ hashFiles('**/.tool-versions') }}
 
-      - name: Setup asdf
-        uses: asdf-vm/actions/setup@v3
 
-      - name: Install asdf
-        uses: asdf-vm/actions/install@v3
+
+      # - name: Install asdf
+      #   uses: asdf-vm/actions/install@v3
 
 
 
