@@ -33,6 +33,17 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/metabase-0.1.0/metabase-0.1.0.tgz
     version: 0.1.0
+  ollama:
+  - apiVersion: v2
+    appVersion: 0.22.1
+    created: "2026-05-04T22:57:51.44430552Z"
+    description: Ollama with Gemma3:1b model
+    digest: b9130b18946f0270256b9f9b091168f1ec40a8e2fe35e3a1448eb9b40f7d6986
+    name: ollama
+    type: application
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/ollama-0.1.0/ollama-0.1.0.tgz
+    version: 0.1.0
   patroni:
   - apiVersion: v1
     appVersion: 3.2-p1
@@ -1012,4 +1023,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2026-03-02T19:24:56.062822095Z"
+generated: "2026-05-04T22:57:51.444996559Z"
