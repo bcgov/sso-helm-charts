@@ -36,6 +36,16 @@ entries:
   ollama:
   - apiVersion: v2
     appVersion: 0.22.1
+    created: "2026-10-30T21:54:11.117634926Z"
+    description: Ollama with Gemma3:1b model
+    digest: 23a3883dafe1125b4b93876008e50c4eee5abacd2e5a1b5238adfcaaea8637a0
+    name: ollama
+    type: application
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/ollama-0.1.1/ollama-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 0.22.1
     created: "2026-05-04T22:57:51.44430552Z"
     description: Ollama with Gemma3:1b model
     digest: b9130b18946f0270256b9f9b091168f1ec40a8e2fe35e3a1448eb9b40f7d6986
@@ -45,6 +55,20 @@ entries:
     - https://github.com/bcgov/sso-helm-charts/releases/download/ollama-0.1.0/ollama-0.1.0.tgz
     version: 0.1.0
   patroni:
+  - apiVersion: v1
+    appVersion: 3.2-p1
+    created: "2026-10-30T21:54:11.37937785Z"
+    description: 'Highly available: HA PostgreSQL cluster.'
+    digest: 2150c71f8c0e9973763465c0fcecc1f62a63df3cf94f42e2e90ce33dadd80c7e
+    home: https://github.com/bcgov/sso-helm-charts/tree/main/charts/patroni
+    name: patroni
+    sources:
+    - https://github.com/zalando/patroni
+    - https://github.com/zalando/spilo
+    - https://github.com/bcgov/spilo-chart
+    urls:
+    - https://github.com/bcgov/sso-helm-charts/releases/download/patroni-1.6.3/patroni-1.6.3.tgz
+    version: 1.6.3
   - apiVersion: v1
     appVersion: 3.2-p1
     created: "2025-02-04T21:46:14.964308657Z"
@@ -1023,4 +1047,4 @@ entries:
     urls:
     - https://github.com/bcgov/sso-helm-charts/releases/download/sysdig-0.1.0/sysdig-0.1.0.tgz
     version: 0.1.0
-generated: "2026-05-04T22:57:51.444996559Z"
+generated: "2026-10-30T21:54:11.379715204Z"
