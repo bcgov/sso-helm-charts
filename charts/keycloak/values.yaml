@@ -146,6 +146,8 @@ patroni:
   nameOverride: sso-patroni
   fullnameOverride: sso-patroni
 
+  appDbName: ssokeycloak
+
   additionalCredentials:
     - username: ssokeycloak
       password:
