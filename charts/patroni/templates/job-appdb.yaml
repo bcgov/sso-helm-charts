@@ -36,14 +36,18 @@ spec:
               do
                 password="${passwords[$index]}"
 
-                echo "select 'create database $username' where not exists (select from pg_database where datname = '$username')\gexec" | psql -d postgres
-                psql -d $username -qta --set on_error_stop=1 <<eof
+                dbname="$username"
+                override="{{ .Values.appDbName }}"
+                if [[ -n "$override" && ${#usernames[@]} -eq 1 ]]; then dbname="$override"; fi
+
+                echo "select 'create database $dbname' where not exists (select from pg_database where datname = '$dbname')\gexec" | psql -d postgres
+                psql -d $dbname -qta --set on_error_stop=1 <<eof
                 do
                 \$do\$
                 begin
                   if not exists (select from pg_catalog.pg_roles where rolname = '$username') then
                     create role $username login password '$password';
-                    grant all privileges on database $username to $username;
+                    grant all privileges on database $dbname to $username;
                     grant all on schema public to $username;
                   end if;
                 end
