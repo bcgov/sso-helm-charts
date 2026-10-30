@@ -156,6 +156,9 @@ podDisruptionBudget:
   minAvailable: 1
   maxUnavailable:
 
+# Optional: database name override; only applied when exactly one app user exists, otherwise the database is named after the username
+appDbName: ""
+
 standby:
   enabled: false
   host:
