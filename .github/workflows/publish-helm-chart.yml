@@ -9,6 +9,9 @@ on:
       - ".github/workflows/publish-helm-chart.yml"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-and-push-helm:
     runs-on: ubuntu-24.04
